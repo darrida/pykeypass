@@ -1,3 +1,4 @@
-*\pykeypass.*
+*\pykeypass.egg-info
+*\pykeypass.cpython-37.*
 *\__pycache__.*
 *\venv
