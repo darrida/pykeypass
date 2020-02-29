@@ -12,10 +12,10 @@ pykeypass (because pykeepass was already taken) uses the pykeepass library to ma
   - [Usage](#usage)
     - [Setup standalone Keepass executable and app database:](#setup-standalone-keepass-executable-and-app-database)
     - [Setup a new Keypass database entry](#setup-a-new-keypass-database-entry)
-    - [See list of configured entries](#see-list-of-configured-entries)
-    - [Open all configured Keepass databases](#open-all-configured-keepass-databases)
-    - [Open individual Keepass databases](#open-individual-keepass-databases)
-    - [Show path of configured entry](#show-path-of-configured-entry)
+    - [Open all Keepass databases](#open-all-keepass-databases)
+    - [Open individual Keepass database](#open-individual-keepass-database)
+    - [Show list of configured databases](#show-list-of-configured-databases)
+    - [Show path of individual configured database](#show-path-of-individual-configured-database)
 
 ## Background
 
@@ -114,25 +114,25 @@ DONE: database_with_key keepass password setup.
 Try launching with "pykeypass open database_with_key", or "pykeypass all"
 ```
 
-### See list of configured entries
-
-```cmd
-C:\> pykeypass open
-```
-
-### Open all configured Keepass databases
+### Open all Keepass databases
 
 ```cmd
 C:\> pykeypass all
 ```
 
-### Open individual Keepass databases
+### Open individual Keepass database
 
 ```cmd
 C:\> pykeypass open new_entry
 ```
 
-### Show path of configured entry
+### Show list of configured databases
+
+```cmd
+C:\> pykeypass open
+```
+
+### Show path of individual configured database
 
 ```cmd
 C:\> pykeypass open new_entry -p
