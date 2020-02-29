@@ -37,7 +37,7 @@ def pykeypass_setup():
         confirmation = 'y'
     if confirmation == 'y':
         click.echo('STEP 1: Create pykeypass app database.')
-        new_password = getpass.getpass('pykeypass password: ')
+        new_password = getpass.getpass('Create a pykeypass password: ')
         keepass.create_database(pykeypass_db, password=new_password)
         kp = PyKeePass(pykeypass_db, password=new_password)
         click.echo("DONE: pykeypass app database created.\n"
