@@ -16,6 +16,7 @@ pykeypass (because pykeepass was already taken) uses the pykeepass library to ma
     - [Open individual Keepass database](#open-individual-keepass-database)
     - [Show list of configured databases](#show-list-of-configured-databases)
     - [Show path of individual configured database](#show-path-of-individual-configured-database)
+  - [Testing](#testing)
   - [Notes about development history](#notes-about-development-history)
 
 ## Background
@@ -139,6 +140,12 @@ C:\> pykeypass open
 
 ```cmd
 C:\> pykeypass open new_entry -p
+```
+
+## Testing
+
+```cmd
+<placeholder>
 ```
 
 ## Notes about development history
