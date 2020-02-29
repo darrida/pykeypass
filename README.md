@@ -82,11 +82,14 @@ Setup keepass databases by using:
 
 ### Setup a new Keypass database entry
 
-- Initiate the entry setup dialogue using: ```pykeypass open <new_entry> -s```
-  - pykeypass will walk through the following:
-    - (1) Specifying the new Keepass database url
-    - (2) Specifying the password
-    - (3) Whether or not the Keepass database uses a paired security key
+```cmd
+pykeypass open <new_entry> -s
+```
+
+- pykeypass will walk through the following:
+  - (1) Specifying the new Keepass database url
+  - (2) Specifying the password
+  - (3) Whether or not the Keepass database uses a paired security key
 - Standard Example:
 
 ```cmd
