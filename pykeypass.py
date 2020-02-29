@@ -10,10 +10,9 @@ import click
 from pykeepass import PyKeePass
 import pykeepass as keepass
 
-########################################
-########## DECLARE VARIABLES ###########
-########################################
-pykeypass_folder = Path.home() / 'pykeypass_app_files'
+
+########## GLOBAL VARIABLES ###########
+pykeypass_folder = Path.home() / '.pykeypass'
 pykeypass_app = pykeypass_folder / 'keepass.exe'
 pykeypass_db = pykeypass_folder / 'pykeepass.kdbx'
 #######################################
@@ -21,7 +20,10 @@ pykeypass_db = pykeypass_folder / 'pykeepass.kdbx'
 
 @click.group()
 def cli():
-    '''KEEPASS CLI TOOL'''
+    '''KEEPASS CLI TOOL
+    
+    This tool can be configured to launch any number of Keepass databases with a single command (and password).
+    '''
 
 
 @cli.command('setup', help='Initial setup of pykeypass app database.')
@@ -46,13 +48,15 @@ def pykeypass_setup():
 
 
 @cli.command('open', help='Launches specified Keepass database.')
-@click.argument('database')
+@click.argument('database', required=False)
 @click.option('-s', '--setup', 'setup', is_flag=True, help='Add or replace a named Keepass database')
 @click.option('-p', '--path', 'path', is_flag=True, help='Show named Keepass path')
 @click.option('-i', '--input_password', 'input_password', help="reserved for use with 'pykeepass all'")
 @click.option('-o', '--options', 'options', is_flag=True, help='Lists Keypass databases available')
 def keepass_open(database, setup, path, options, input_password=None):
     try:
+        if database == None:
+            options = True
         if setup:
             try:
                 click.echo(f'START: Setup {database} keepass.')
@@ -82,15 +86,17 @@ def keepass_open(database, setup, path, options, input_password=None):
                         entry.set_custom_property('key', str(key_file))
                 kp.save()
                 click.echo(f'DONE: {database} keepass password setup.')
-                click.echo(f'Try launching with "pykeepass open {database}"')
+                click.echo(f'Try launching with "pykeypass open {database}", or "pykeypass all"')
             except keepass.exceptions.CredentialsIntegrityError as e:
                 click.echo('ERROR: pykeypass login information invalid.\n')
         elif options:
             #try:
             kp = PyKeePass(pykeypass_db, password=getpass.getpass('pykeypass password: '))
             groups = kp.find_groups(name='.', regex=True)
+            click.echo('The "open" command launches the specified Keepass database entry in it\'s argument.\n\nENTRIES AVAILABLE: ')
             for i in groups[1:]:
-                print(str(i)[8:-2])
+                if str(i)[8:-2] != 'Recycle Bin':
+                    print(str(i)[8:-2])
         elif path:
             try:
                 kp = PyKeePass(pykeypass_db, password=getpass.getpass('pykeypass password: '))
@@ -101,20 +107,19 @@ def keepass_open(database, setup, path, options, input_password=None):
                     click.echo(f'{database.upper()} KEY: {key_name}')
             except keepass.exceptions.CredentialsIntegrityError as e:
                 click.echo('ERROR: pykeypass login information invalid.\n')
+            except AttributeError as e:
+                click.echo(f'ISSUE: All or part of the {database} Keepass entry was not found.\nFIX: Setup this entry using: "pykeypass open {database} -s')
         else:
             try:
                 password = getpass.getpass('pykeepass password: ') if input_password == None else input_password
                 kp = keepass.PyKeePass(pykeypass_db, password=password)
                 entry = kp.find_entries(title=f'{database}', first=True)
+                print(entry)
                 if entry.get_custom_property('key') != None:
                     key_file = entry.get_custom_property('key')
-                    print(entry.url)
-                    print(key_file)
                     subprocess.Popen(f'{pykeypass_app} "{entry.url}" -pw:{entry.password} -keyfile:"{key_file}"',
                                      stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                 else:
-                    print(entry.url)
-                    print(pykeypass_app)
                     subprocess.Popen(f'{pykeypass_app} "{entry.url}" -pw:{entry.password}', 
                                      stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             except keepass.exceptions.CredentialsIntegrityError as e:
@@ -123,6 +128,8 @@ def keepass_open(database, setup, path, options, input_password=None):
                 click.echo(f'ERROR: Setup item for {database} file missing or incorrect')
                 if str(e) == "'NoneType' object has no attribute 'url'":
                     click.echo(f'ISSUE: It looks like there is no url configured for the {database} Keepass database.')
+                elif entry == None:
+                    click.echo(f'ISSUE: All or part of the {database} Keepass entry was not found.\nFIX: Setup this entry using: "pykeypass open {database} -s')
                 elif str(e) == "'NoneType' object has no attribute 'password'":
                     click.echo(f'ISSUE: It looks like there is no password configured for the {database} Keepass database.')
                 else:
@@ -133,7 +140,7 @@ def keepass_open(database, setup, path, options, input_password=None):
         click.echo("ERROR: pykeepass app database not found. Use 'pykeypass setup' to get started.\n")
 
 
-@cli.command('all', help='Starts all keepass database.')
+@cli.command('all', help='Starts all configured keepass databases.')
 def keepass_all():
     try:
         password = getpass.getpass('pykeepass password: ')
