@@ -312,13 +312,22 @@ def keepass_local(setup, path, input_password=None):
 def keepass_all():
     try:
         password = getpass.getpass('pykeepass password: ')
-        pipe_local = subprocess.Popen(f'pykeypass open local -i {password}', stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        if pipe_local.communicate():
-            if pipe_local.returncode == 0:
-                click.echo('STATUS: Local keypass database launched successfully.')
-        pipe_network = subprocess.Popen(f'pykeypass open key -i {password}', stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        if pipe_network.communicate():
-            if pipe_network.returncode == 0:
-                click.echo('STATUS: Network keypass database launched successfully.')
+        kp = PyKeePass(pykeypass_db, password=password)
+        groups = kp.find_groups(name='.', regex=True)
+        for i in groups[1:]:
+            database_entry = str(i)[8:-2]
+            pipe_local = subprocess.Popen(f'pykeypass open {database_entry} -i {password}', stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            if pipe_local.communicate():
+                if pipe_local.returncode == 0:
+                    click.echo(f'STATUS: {database_entry} keypass database launched successfully.')
+        
+        # pipe_local = subprocess.Popen(f'pykeypass open local -i {password}', stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        # if pipe_local.communicate():
+        #     if pipe_local.returncode == 0:
+        #         click.echo('STATUS: Local keypass database launched successfully.')
+        # pipe_network = subprocess.Popen(f'pykeypass open key -i {password}', stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        # if pipe_network.communicate():
+        #     if pipe_network.returncode == 0:
+        #         click.echo('STATUS: Network keypass database launched successfully.')
     except subprocess.CalledProcessError as e:
         click.echo(e)
