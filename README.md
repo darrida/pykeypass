@@ -53,7 +53,7 @@ pykeypass allows me to open the Command Prompt, type ```pykeypass all```, input 
 
 - Windows
   - Launch **uninstall.bat**
-- Linus
+- Linux (*untested*)
   - Launch **uninstall.sh**
   - NOTE: if running from the terminal, the following may be required:
     - ```chmod u+x uninstall.sh```
