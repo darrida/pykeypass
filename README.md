@@ -143,7 +143,7 @@ C:\> pykeypass open new_entry -p
 - [ ] Clean up copy here
 
 - **VBScript:** The very first version of this was built in VBScript in 2014 (and yes, VBS was old then as well): <https://github.com/darrida/KeePass_Login_App>
-  - I actually used the VBS version up until just a few months ago. I had built several CLI apps at that point, but because the VBS thing worked "ok" *enough* it took me a long time to get around to rewriting it.
+  - I actually used the VBS version up until just a few months ago. I had built a number of Python based CLI apps at that point, but because the VBS thing worked "ok" *enough* it took me a long time to get around to rewriting it.
   - In this version everything was hardcoded. I hardcoded entries in my config ini file so that I could have one Keepass database that required the use of a password *and* a security key file, and two Keepass databases that only required a password.
   - This version also tried to depend on a combination of obsurity and access to multiple locations for security.
     - The ini file with the hashed passwords was stored on an encypted USB drive that was plugged in and decrypted every morning.
