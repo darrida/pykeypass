@@ -90,7 +90,6 @@ def keepass_open(database, setup, path, options, input_password=None):
             except keepass.exceptions.CredentialsIntegrityError as e:
                 click.echo('ERROR: pykeypass login information invalid.\n')
         elif options:
-            #try:
             kp = PyKeePass(pykeypass_db, password=getpass.getpass('pykeypass password: '))
             groups = kp.find_groups(name='.', regex=True)
             click.echo('The "open" command launches the specified Keepass database entry in it\'s argument.\n\nENTRIES AVAILABLE: ')
