@@ -18,6 +18,7 @@ pykeypass (because pykeepass was already taken) uses the pykeepass library to ma
     - [Show path of individual configured database](#show-path-of-individual-configured-database)
   - [Testing](#testing)
   - [Notes about development history](#notes-about-development-history)
+  - [Next steps](#next-steps)
 
 ## Background
 
@@ -164,10 +165,9 @@ C:\> pykeypass open new_entry -p
 - **Python:** More recently, after using Python to varying degress for a good 3 years or so, I finally got around to rewriting the tool.
   - The first iteration pretty much copied the hardcoded nature of the VBS version, but it took advantage of the Keepass command line support.
     - The big improvement was that all of launch/login activity took place before the fully logged in Keepass window appeared. It also was no longer interrupted by other loading processes.
-    - This version incorperated no flexibility, as it was coded specifically for the specific Keepass files that I depended on.
-    - At this point there were three functions, one for each of the two Keepass files I use, and one that facilitate launching both files at ones.
+    - This version incorperated no flexibility, as it was coded specifically for the Keepass files that I depended on.
   - The second iteration was to incorperate more flexibility into one of the two files that I launch.
-    - Why not both files? Well, that's primarily because there is one common file that used by many people, which never changes. The information related to that file I left hardcoded. This file also requires a security key file, which just takes a little more work to manage.
+    - Why not both files? Well, that's primarily because there is one common file used by many people - the name and location never changes. The information related to that file I left hardcoded. This file also requires a security key file, which just takes a little more work to manage.
     - This version also included a rudementary wizard for configuring the one flexible file.
   - The third iteration involved moving away from storing hashed (but reversible) passwords in a flat file.
     - I found pykeepass, a Python package that makes working with Keepass databases easy (<https://github.com/libkeepass/pykeepass).>
@@ -177,4 +177,7 @@ C:\> pykeypass open new_entry -p
     - Moved storage of configuration information to a ".pykeypass" folder in the home directory
     - Rewrote all install, uninstall, and Keepass entry setup processes to make it more straightforward and handle errors much more effectively (including a large number of responses that help the user setup things up correctly).
     - Requires much less understanding of the tool in order to use it.
-  
+
+## Next steps
+
+- [ ] Clean up functions in pykeypass.py and move much of the internal logical to another imported file so that it's easilier to follow the logic in the Click CLI commands.

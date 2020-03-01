@@ -28,6 +28,11 @@ def cli():
 
 @cli.command('setup', help='Initial setup of pykeypass app database.')
 def pykeypass_setup():        
+    """Intial setup
+
+    - Copies Keepass.exe to .pykeypass folder in home directory
+    - Creates pykeypass.kdbx in .pykeypass folder in hom directory
+    """
     if os.path.exists(pykeypass_app) == False:
         Path(pykeypass_folder).mkdir(parents=True, exist_ok=True)
         shutil.copyfile(Path.cwd() / 'thirdparty' / 'keepass_portable' / 'keepass.exe', pykeypass_app)
@@ -47,13 +52,24 @@ def pykeypass_setup():
         click.echo('pykeypass setup cancelled.')
 
 
-@cli.command('open', help='Launches specified Keepass database.')
+@cli.command('open', help='Launches functionality for a specific Keepass database.')
 @click.argument('database', required=False)
-@click.option('-s', '--setup', 'setup', is_flag=True, help='Add or replace a named Keepass database')
-@click.option('-p', '--path', 'path', is_flag=True, help='Show named Keepass path')
-@click.option('-i', '--input_password', 'input_password', help="reserved for use with 'pykeepass all'")
-@click.option('-o', '--options', 'options', is_flag=True, help='Lists Keypass databases available')
+@click.option('-s', '--setup', 'setup', is_flag=True, help='Add or replace the requsested database entry')
+@click.option('-p', '--path', 'path', is_flag=True, help='Show path(s) associated with requested database entry')
+@click.option('-i', '--input_password', 'input_password', help="Reserved for use with 'pykeepass all'")
+@click.option('-o', '--options', 'options', is_flag=True, help='Lists Keypass database entries available')
 def keepass_open(database, setup, path, options, input_password=None):
+    """Launches functionality for specified Keepass database.
+
+    When no argument is provided, function defaults to the 'options' flag.
+
+    Args:
+        database (string):                 Launches specific database entry when no options are used.
+        setup (boolean):                   When used, launches setup wizard for database entry. Defaults to False.
+        path (boolean):                    When used, shows file(s) for database entry. Defaults to False.
+        options (boolean):                 When used, shows list of all database entries available. Defaults to False.
+        input_password (string, optional): Designed for use by the keepass_all() function further below. Defaults to None.
+    """
     try:
         if database == None:
             options = True
@@ -139,8 +155,10 @@ def keepass_open(database, setup, path, options, input_password=None):
         click.echo("ERROR: pykeepass app database not found. Use 'pykeypass setup' to get started.\n")
 
 
-@cli.command('all', help='Starts all configured keepass databases.')
+@cli.command('all', help='Starts all configured Keepass databases.')
 def keepass_all():
+    """Launches all database entries
+    """
     try:
         password = getpass.getpass('pykeepass password: ')
         kp = PyKeePass(pykeypass_db, password=password)
