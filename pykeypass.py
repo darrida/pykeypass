@@ -33,23 +33,28 @@ def pykeypass_setup():
     - Copies Keepass.exe to .pykeypass folder in home directory
     - Creates pykeypass.kdbx in .pykeypass folder in hom directory
     """
-    if os.path.exists(pykeypass_app) == False:
-        Path(pykeypass_folder).mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(Path.cwd() / 'thirdparty' / 'keepass_portable' / 'keepass.exe', pykeypass_app)
-    if os.path.exists(pykeypass_db):
-        confirmation = input('WARNING: If an app database already exists, this process will delete it and create a fresh one.\nProceed? (y/n) ')
-    else:
-        confirmation = 'y'
-    if confirmation == 'y':
-        click.echo('STEP 1: Create pykeypass app database.')
-        new_password = getpass.getpass('Create a pykeypass password: ')
-        keepass.create_database(pykeypass_db, password=new_password)
-        kp = PyKeePass(pykeypass_db, password=new_password)
-        click.echo("DONE: pykeypass app database created.\n"
-                   "Setup keepass databases by using:\n"
-                   "- 'pykeypass open <new_name> -s'\n")
-    else:
-        click.echo('pykeypass setup cancelled.')
+    try:
+        if os.path.exists(pykeypass_app) == False:
+            Path(pykeypass_folder).mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(Path.cwd() / 'thirdparty' / 'keepass_portable' / 'keepass.exe', pykeypass_app)
+        if os.path.exists(pykeypass_db):
+            confirmation = input('WARNING: If an app database already exists, this process will delete it and create a fresh one.\nProceed? (y/n) ')
+        else:
+            confirmation = 'y'
+        if confirmation == 'y':
+            click.echo('STEP 1: Create pykeypass app database.')
+            new_password = getpass.getpass('Create a pykeypass password: ')
+            keepass.create_database(pykeypass_db, password=new_password)
+            kp = PyKeePass(pykeypass_db, password=new_password)
+            click.echo("DONE: pykeypass app database created.\n"
+                    "Setup keepass databases by using:\n"
+                    "- 'pykeypass open <new_name> -s'\n")
+        else:
+            click.echo('pykeypass setup cancelled.')
+    except FileNotFoundError as e:
+        click.echo("""ERROR: pykeypass app not setup. To setup, perform one of the following:
+(1) Run 'install.bat' from pykeypass app folder.
+(2) Open CMD/terminal in root of pykeypass app directory and run 'pykeypass setup' (all other functionality is global)""")
 
 
 @cli.command('open', help='Launches functionality for a specific Keepass database.')
@@ -129,7 +134,6 @@ def keepass_open(database, setup, path, options, input_password=None):
                 password = getpass.getpass('pykeepass password: ') if input_password == None else input_password
                 kp = keepass.PyKeePass(pykeypass_db, password=password)
                 entry = kp.find_entries(title=f'{database}', first=True)
-                print(entry)
                 if entry.get_custom_property('key') != None:
                     key_file = entry.get_custom_property('key')
                     subprocess.Popen(f'{pykeypass_app} "{entry.url}" -pw:{entry.password} -keyfile:"{key_file}"',
