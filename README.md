@@ -1,6 +1,6 @@
 # pykeypass
 
-pykeypass (because pykeepass was already taken) uses the pykeepass library to manage and launch multiple Keepass libraries
+pykeypass (because pykeepass was already taken) uses the pykeepass library to setup to specify and quickly launch multiple Keepass databases
 
 **Table of Contents**
 
