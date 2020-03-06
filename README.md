@@ -46,17 +46,24 @@ pykeypass allows me to open the Command Prompt, type ```pykeypass all```, input 
    - Option 2: Clone the repository
 
 3. Install pykeypass (enable global command line availability)
-   - Windows only
+   - Windows via script
      - Launch **install.bat**
-   - Windows or Linux (needs additional testing)
+   - Windows  via CMD
+     - Open termical from the pykeypass directory
+     - Run ```pip install --editable .```
+     - Run ```pykeypass setup```
+   
+   - Linux - *not yet working*
+     - Ideally, the following should work (but does not)
      - Open the terminal from the pykeypass directory
-     - Run ```pip install -editable .```
+     - Run ```pip3 install -editable .```
+     - Run ```pykeypass setup```
 
 ### Remove
 
 - Windows
   - Launch **uninstall.bat**
-- Linux (*untested*)
+- Linux (*net yet working*)
   - Launch **uninstall.sh**
   - NOTE: if running from the terminal, the following may be required:
     - ```chmod u+x uninstall.sh```
@@ -66,9 +73,9 @@ pykeypass allows me to open the Command Prompt, type ```pykeypass all```, input 
 
 ### Setup standalone Keepass executable and app database:
 
+- **NOTE:** Initial setup of pykeypass database should place during the setup above. The process below can be used to re-setup the pykeypass database
 ```cmd
-C:\> pykeypass setup
-Create a pykeypass password:
+pykeypass setup
 ```
 
 - Input password when directed.
@@ -95,7 +102,7 @@ pykeypass open <new_entry> -s
 - Standard Example:
 
 ```cmd
-C:\> pykeypass open new_entry -s
+C:\> pykeypass open <new_entry> -s
 START: Setup database_with_key keepass.
 pykeypass password:
 Set new_entry Keepass url: C:\Users\<user>\Documents\database.kdbx
@@ -108,7 +115,7 @@ Try launching with "pykeepass open local"
 - Example with paired security key:
 
 ```cmd
-C:\> pykeypass open new_entry -s
+C:\> pykeypass open <new_entry> -s
 START: Setup database_with_key keepass.
 pykeypass password:
 Set database_with_key Keepass url: C:\Users\<user>\Documents\database.kdbx
@@ -122,25 +129,31 @@ Try launching with "pykeypass open database_with_key", or "pykeypass all"
 ### Open all Keepass databases
 
 ```cmd
-C:\> pykeypass all
+pykeypass all
 ```
 
 ### Open individual Keepass database
 
 ```cmd
-C:\> pykeypass open new_entry
+pykeypass open <new_entry>
 ```
 
 ### Show list of configured databases
 
 ```cmd
-C:\> pykeypass open
+pykeypass open
 ```
 
 ### Show path of individual configured database
 
 ```cmd
-C:\> pykeypass open new_entry -p
+pykeypass open <new_entry> -p
+```
+
+### Show list of configured configured database entries
+
+```cmd
+pykeypass open <new_entry> -o
 ```
 
 ## Testing
@@ -153,7 +166,7 @@ C:\> pykeypass open new_entry -p
 
 - [ ] Clean up copy here
 
-- **VBScript:** The very first version of this was built in VBScript in 2014 (and yes, VBS was old then as well): <https://github.com/darrida/KeePass_Login_App>
+- **VBScript (*previous version*):** The very first version of this was built in VBScript in 2014 (and yes, VBS was old then as well): <https://github.com/darrida/KeePass_Login_App>
   - I actually used the VBS version up until just a few months ago. I had built a number of Python based CLI apps at that point, but because the VBS thing worked "ok" *enough* it took me a long time to get around to rewriting it.
   - In this version everything was hardcoded. I hardcoded entries in my config ini file so that I could have one Keepass database that required the use of a password *and* a security key file, and two Keepass databases that only required a password.
   - This version also tried to depend on a combination of obsurity and access to multiple locations for security.
