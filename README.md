@@ -62,7 +62,9 @@ pykeypass allows me to open the Command Prompt, type ```pykeypass all```, input 
 ### Remove
 
 - Windows
-  - Launch **uninstall.bat**
+  - Script: Launch **uninstall.bat**
+  - CMD: From app root directory - ```pip uninstall -r requirements_remove.txt```
+    - Experimental: ```python uninstall.py```
 - Linux (*net yet working*)
   - Launch **uninstall.sh**
   - NOTE: if running from the terminal, the following may be required:
