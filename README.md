@@ -48,12 +48,13 @@ pykeypass allows me to open the Command Prompt, type ```pykeypass all```, input 
 3. Install pykeypass (enable global command line availability)
    - Windows via script
      - Launch **install.bat**
-   - Windows  via CMD
-     - Open termical from the pykeypass directory
+     
+   - Windows via CMD
+     - Open CMD from the pykeypass directory
      - Run ```pip install --editable .```
      - Run ```pykeypass setup```
    
-   - Linux - *not yet working*
+   - Linux (*not yet working*)
      - Ideally, the following should work (but does not)
      - Open the terminal from the pykeypass directory
      - Run ```pip3 install -editable .```
@@ -61,9 +62,11 @@ pykeypass allows me to open the Command Prompt, type ```pykeypass all```, input 
 
 ### Remove
 
-- Windows
-  - Script: Launch **uninstall.bat**
-  - CMD: From app root directory - ```pip uninstall -r requirements_remove.txt```
+- Windows via script:
+  - Launch **uninstall.bat**
+- Windows via CMD  
+    - Open CMD from the pykeypass directory
+    - Run ```pip install --editable .```
     - Experimental: ```python uninstall.py```
 - Linux (*net yet working*)
   - Launch **uninstall.sh**
