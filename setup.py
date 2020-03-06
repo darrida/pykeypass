@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='pykeypass',
-    version='0.9',
+    version='0.91',
     py_modules=['pykeypass'],
     install_requires=[
         'Click',
