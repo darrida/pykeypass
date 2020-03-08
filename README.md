@@ -163,8 +163,22 @@ pykeypass open <new_entry> -o
 
 ## Testing
 
+- Uses pytest and Click CliRunner
+- Coverage: 81% (as of 3/8/2020)
+
+Run simple test from root of app directory
 ```cmd
-<placeholder>
+pytest -v test.py
+```
+
+Run Coverage
+```cmd
+coverage run -m pytest -v test.py
+```
+
+Generage HTML Coverage report
+```cmd
+coverage html
 ```
 
 ## Notes about development history
