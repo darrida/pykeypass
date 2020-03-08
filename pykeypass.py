@@ -15,7 +15,8 @@ import pykeepass as keepass
 pykeypass_folder = Path.home() / '.pykeypass'
 pykeypass_app = pykeypass_folder / 'keepass.exe'
 pykeypass_db = pykeypass_folder / 'pykeepass.kdbx'
-#######################################
+########## PYTEST VARIABLES ###########
+test_pykeypass_folder = Path.cwd() / 'test' / '.pykeypass'
 
 
 @click.group()
@@ -27,13 +28,18 @@ def cli():
 
 
 @cli.command('setup', help='Initial setup of pykeypass app database.')
-def pykeypass_setup():        
+@click.option('-t', '--test', 'test', is_flag=True, hidden=True)
+def pykeypass_setup(test):
     """Intial setup
 
     - Copies Keepass.exe to .pykeypass folder in home directory
     - Creates pykeypass.kdbx in .pykeypass folder in hom directory
     """
     try:
+        if test:
+            pykeypass_folder = test_pykeypass_folder
+            pykeypass_app = pykeypass_folder / 'keepass.exe'
+            pykeypass_db = pykeypass_folder / 'pykeepass.kdbx'
         if os.path.exists(pykeypass_app) == False:
             Path(pykeypass_folder).mkdir(parents=True, exist_ok=True)
             shutil.copyfile(Path.cwd() / 'thirdparty' / 'keepass_portable' / 'keepass.exe', pykeypass_app)
@@ -63,7 +69,8 @@ def pykeypass_setup():
 @click.option('-p', '--path', 'path', is_flag=True, help='Show path(s) associated with requested database entry')
 @click.option('-i', '--input_password', 'input_password', help="Reserved for use with 'pykeepass all'")
 @click.option('-o', '--options', 'options', is_flag=True, help='Lists Keypass database entries available')
-def keepass_open(database, setup, path, options, input_password=None):
+@click.option('-t', '--test', 'test', is_flag=True, hidden=True)
+def keepass_open(database, setup, path, options, test, input_password=None):
     """Launches functionality for specified Keepass database.
 
     When no argument is provided, function defaults to the 'options' flag.
@@ -76,6 +83,10 @@ def keepass_open(database, setup, path, options, input_password=None):
         input_password (string, optional): Designed for use by the keepass_all() function further below. Defaults to None.
     """
     try:
+        if test:
+            pykeypass_folder = test_pykeypass_folder
+            pykeypass_app = pykeypass_folder / 'keepass.exe'
+            pykeypass_db = pykeypass_folder / 'pykeepass.kdbx'
         if database == None:
             options = True
         if setup:
@@ -113,7 +124,7 @@ def keepass_open(database, setup, path, options, input_password=None):
         elif options:
             kp = PyKeePass(pykeypass_db, password=getpass.getpass('pykeypass password: '))
             groups = kp.find_groups(name='.', regex=True)
-            click.echo('The "open" command launches the specified Keepass database entry in it\'s argument.\n\nENTRIES AVAILABLE: ')
+            click.echo('ENTRIES AVAILABLE: ')
             for i in groups[1:]:
                 if str(i)[8:-2] != 'Recycle Bin':
                     print(str(i)[8:-2])
@@ -160,18 +171,28 @@ def keepass_open(database, setup, path, options, input_password=None):
 
 
 @cli.command('all', help='Starts all configured Keepass databases.')
-def keepass_all():
+@click.option('-t', '--test', 'test', is_flag=True, hidden=True)
+def keepass_all(test=''):
     """Launches all database entries
     """
     try:
+        if test:
+            test = '-t'
+            pykeypass_folder = test_pykeypass_folder
+            pykeypass_app = pykeypass_folder / 'keepass.exe'
+            pykeypass_db = pykeypass_folder / 'pykeepass.kdbx'
         password = getpass.getpass('pykeepass password: ')
         kp = PyKeePass(pykeypass_db, password=password)
         groups = kp.find_groups(name='.', regex=True)
-        for i in groups[1:]:
-            database_entry = str(i)[8:-2]
-            pipe_local = subprocess.Popen(f'pykeypass open {database_entry} -i {password}', stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            if pipe_local.communicate():
-                if pipe_local.returncode == 0:
-                    click.echo(f'STATUS: {database_entry} keypass database launched successfully.')
+        if len(groups) > 1:
+            for i in groups[1:]:
+                database_entry = str(i)[8:-2]
+                pipe_local = subprocess.Popen(f'pykeypass open {database_entry} -i {password} {test}', stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                if pipe_local.communicate():
+                    if pipe_local.returncode == 0:
+                        click.echo(f'STATUS: {database_entry} keypass database launched successfully.')
+        else:
+            click.echo('NOTICE: No entry created. Use \'pykeypass open <new_name> -s\''
+                + 'to get started.')
     except subprocess.CalledProcessError as e:
         click.echo(e)
