@@ -55,7 +55,7 @@ def test_pykeypass_all_no_db():
     assert "ERROR: pykeepass app database not found. Use 'pykeypass setup' to get started.\n" in result.output
 
 
-def test_pykeypass_setup(input, getpass):
+def test_pykeypass_setup():
     """Test pykeypass setup."""
     result = runner.invoke(cli, ['setup', '-t'], input='12345')
     assert result.exit_code == 0
