@@ -16,6 +16,7 @@ pykeypass (because pykeepass was already taken) uses the pykeepass library to se
     - [Open individual Keepass database](#open-individual-keepass-database)
     - [Show list of configured databases](#show-list-of-configured-databases)
     - [Show path of individual configured database](#show-path-of-individual-configured-database)
+    - [Show list of configured configured database entries](#show-list-of-configured-configured-database-entries)
   - [Testing](#testing)
   - [Notes about development history](#notes-about-development-history)
   - [Next steps](#next-steps)
@@ -167,16 +168,19 @@ pykeypass open <new_entry> -o
 - Coverage: 81% (as of 3/8/2020)
 
 Run simple test from root of app directory
+
 ```cmd
 pytest -v test.py
 ```
 
 Run Coverage
+
 ```cmd
 coverage run -m pytest -v test.py
 ```
 
 Generage HTML Coverage report
+
 ```cmd
 coverage html
 ```

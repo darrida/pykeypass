@@ -139,7 +139,7 @@ def keepass_open(database, setup, path, options, test, input_password=None):
             except keepass.exceptions.CredentialsIntegrityError as e:
                 click.echo('ERROR: pykeypass login information invalid.\n')
             except AttributeError as e:
-                click.echo(f'ISSUE: All or part of the {database} Keepass entry was not found.\nFIX: Setup this entry using: "pykeypass open {database} -s')
+                click.echo(f'ISSUE: All or part of the {database} Keepass entry was not found.\nFIX: Setup this entry using: "pykeypass open {database} -s"')
         else:
             try:
                 password = getpass.getpass('pykeepass password: ') if input_password == None else input_password
@@ -159,9 +159,9 @@ def keepass_open(database, setup, path, options, test, input_password=None):
                 if str(e) == "'NoneType' object has no attribute 'url'":
                     click.echo(f'ISSUE: It looks like there is no url configured for the {database} Keepass database.')
                 elif entry == None:
-                    click.echo(f'ISSUE: All or part of the {database} Keepass entry was not found.\nFIX: Setup this entry using: "pykeypass open {database} -s')
-                elif str(e) == "'NoneType' object has no attribute 'password'":
-                    click.echo(f'ISSUE: It looks like there is no password configured for the {database} Keepass database.')
+                    click.echo(f'ISSUE: All or part of the {database} Keepass entry was not found.\nFIX: Setup this entry using: "pykeypass open {database} -s"')
+                #elif str(e) == "'NoneType' object has no attribute 'password'":
+                #    click.echo(f'ISSUE: It looks like there is no password configured for the {database} Keepass database.')
                 else:
                     click.echo(f'Error message: {e}')
             except subprocess.CalledProcessError as e:
@@ -176,7 +176,7 @@ def keepass_all(test=''):
     """Launches all database entries
     """
     try:
-        if test:
+        if test != '':
             test = '-t'
             pykeypass_folder = test_pykeypass_folder
             pykeypass_app = pykeypass_folder / 'keepass.exe'
@@ -194,5 +194,7 @@ def keepass_all(test=''):
         else:
             click.echo('NOTICE: No entry created. Use \'pykeypass open <new_name> -s\''
                 + 'to get started.')
+    except FileNotFoundError:
+        click.echo('ERROR: pykeepass app database not found. Use \'pykeypass setup\' to get started.\n')
     except subprocess.CalledProcessError as e:
         click.echo(e)
