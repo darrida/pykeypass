@@ -165,7 +165,7 @@ pykeypass open <new_entry> -o
 ## Testing
 
 - Uses pytest and Click CliRunner
-- Coverage: 81% (as of 3/8/2020)
+- Coverage: 94% (as of 3/8/2020)
 
 Run simple test from root of app directory
 
