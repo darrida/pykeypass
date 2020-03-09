@@ -28,7 +28,7 @@ This is a tool that I use almost everyday, both at home and at work.
 **THE PROBLEM:**
 At work I typically have 2-3 different Keepass databases open at the same time. This means that after I arrived on any given day one of the first things I would do is open Keypass. After that I would proceed to open the "File" menu, select the first item out of the recents section, and input the password. Then, again, I'd open the "File" menu and repeat the same set of steps a couple of more times. 
 
-Occassionally I'd find that something cleared out the recents options, which means that I would have to manually browser to the different network directory locations where each Keepass database lived to open them.
+Occassionally I'd find that something cleared out the recents options, which means that I would have to manually browse to the different network directory locations where each Keepass database lived to open them.
 
 **THE SOLUTION:**
 pykeypass allows me to open the Command Prompt, type ```pykeypass all```, input a single password, then sit back and watch all of my Keypass databases open programmatically.
