@@ -25,8 +25,6 @@ pykeypass (because pykeepass was already taken) uses the pykeepass library to se
 
 This is a tool that I use almost everyday, both at home and at work. 
 
-(Well, it's actually just the latest iteration of this tool. The first of many versions was in 2014 when all I knew how to use was VBScript. Things have imporved a *bit* over the last 5-6 years)
-
 **THE PROBLEM:**
 At work I typically have 2-3 different Keepass databases open at the same time. This means that after I arrived on any given day one of the first things I would do is open Keypass. After that I would proceed to open the "File" menu, select the first item out of the recents section, and input the password. Then, again, I'd open the "File" menu and repeat the same set of steps a couple of more times. 
 
