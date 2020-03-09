@@ -148,12 +148,6 @@ pykeypass open <new_entry>
 pykeypass open
 ```
 
-**OR**
-
-```cmd
-pykeypass open <new_entry> -o
-```
-
 ### Show path of individual configured database
 
 ```cmd
