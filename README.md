@@ -77,7 +77,7 @@ pykeypass allows me to open the Command Prompt, type ```pykeypass all```, input 
 
 ### Setup standalone Keepass executable and app database:
 
-- **NOTE:** Initial setup of pykeypass database should place during the setup above. The process below can be used to re-setup the pykeypass database
+- **NOTE:** Initial setup of pykeypass database should take place during the setup above. The process below can be used to re-setup the pykeypass database
 ```cmd
 pykeypass setup
 ```
