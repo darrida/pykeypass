@@ -25,12 +25,10 @@ pykeypass (because pykeepass was already taken) uses the pykeepass library to se
 
 This is a tool that I use almost everyday, both at home and at work. 
 
-(Well, it's actually just the latest iteration of this tool. The first of many versions was in 2014 when all I knew how to use was VBScript. Things have imporved a *bit* over the last 5-6 years)
-
 **THE PROBLEM:**
 At work I typically have 2-3 different Keepass databases open at the same time. This means that after I arrived on any given day one of the first things I would do is open Keypass. After that I would proceed to open the "File" menu, select the first item out of the recents section, and input the password. Then, again, I'd open the "File" menu and repeat the same set of steps a couple of more times. 
 
-Occassionally I'd find that something cleared out the recents options, which means that I would have to manually browser to the different network directory locations where each Keepass database lived to open them.
+Occassionally I'd find that something cleared out the recents options, which means that I would have to manually browse to the different network directory locations where each Keepass database lived to open them.
 
 **THE SOLUTION:**
 pykeypass allows me to open the Command Prompt, type ```pykeypass all```, input a single password, then sit back and watch all of my Keypass databases open programmatically.
@@ -79,7 +77,7 @@ pykeypass allows me to open the Command Prompt, type ```pykeypass all```, input 
 
 ### Setup standalone Keepass executable and app database:
 
-- **NOTE:** Initial setup of pykeypass database should place during the setup above. The process below can be used to re-setup the pykeypass database
+- **NOTE:** Initial setup of pykeypass database should take place during the setup above. The process below can be used to re-setup the pykeypass database
 ```cmd
 pykeypass setup
 ```
@@ -154,12 +152,6 @@ pykeypass open
 
 ```cmd
 pykeypass open <new_entry> -p
-```
-
-### Show list of configured configured database entries
-
-```cmd
-pykeypass open <new_entry> -o
 ```
 
 ## Testing
