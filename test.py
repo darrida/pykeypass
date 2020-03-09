@@ -5,6 +5,7 @@ import os
 import sys
 import subprocess
 import time
+from unittest.mock import patch
 
 # PyPI
 from click.testing import CliRunner
@@ -21,6 +22,7 @@ test_database_with_key_key = test_dir / 'Database_key.key'
 
 # START CLICK PYTEST FUNCTIONALITY
 runner = CliRunner()
+
 
 # PREPARE TEST DATABASE
 def test_setup():
@@ -53,7 +55,7 @@ def test_pykeypass_all_no_db():
     assert "ERROR: pykeepass app database not found. Use 'pykeypass setup' to get started.\n" in result.output
 
 
-def test_pykeypass_setup():
+def test_pykeypass_setup(input, getpass):
     """Test pykeypass setup."""
     result = runner.invoke(cli, ['setup', '-t'], input='12345')
     assert result.exit_code == 0
@@ -148,6 +150,7 @@ def test_pykeypass_create_no_key_replace():
     assert result.exit_code == 0
 
 
+@pytest.mark.filterwarnings("ignore:GetPassWarning")
 def test_pykeypass_path_invalid_password():
     result = runner.invoke(cli, ['open', 'new_entry', '-p', '-t'],
                            input=f'54321\n')
