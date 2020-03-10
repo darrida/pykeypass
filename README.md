@@ -1,4 +1,4 @@
-![Build and Test](https://github.com/darrida/pykeypass/workflows/Python%20application/badge.svg)
+![Python Build/Test](https://github.com/darrida/pykeypass/workflows/Python%20Build/Test/badge.svg?branch=master)
 
 # pykeypass
 
