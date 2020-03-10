@@ -201,18 +201,21 @@ def test_pykeypass_all():
 
 @pytest.mark.flaky(reruns=5, reruns_delay=2)
 def test_teardown_install_files():
-    time.sleep(2)
-    pipe_local = subprocess.Popen('taskkill /IM Keepass.exe', stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    time.sleep(2)
-    if os.path.exists(test_dir / '.pykeypass'):
-        shutil.rmtree(test_dir / '.pykeypass')
-    assert os.path.exists(test_dir / '.pykeypass') == False
-    if os.path.exists(test_dir / 'Database.kdbx'):
-        kp = keepass.PyKeePass(test_dir / 'Database.kdbx', password='12345')
-        entry = kp.find_entries(title=f'new_entry', first=True)
-        if entry != None:
-            kp.delete_entry('new_entry')
+    try:
+        time.sleep(2)
+        pipe_local = subprocess.Popen('taskkill /IM Keepass.exe', stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        time.sleep(2)
+        if os.path.exists(test_dir / '.pykeypass'):
+            shutil.rmtree(test_dir / '.pykeypass')
+        assert os.path.exists(test_dir / '.pykeypass') == False
+        if os.path.exists(test_dir / 'Database.kdbx'):
+            kp = keepass.PyKeePass(test_dir / 'Database.kdbx', password='12345')
             entry = kp.find_entries(title=f'new_entry', first=True)
-            assert entry == None
-        else:
-            assert entry == None
+            if entry != None:
+                kp.delete_entry('new_entry')
+                entry = kp.find_entries(title=f'new_entry', first=True)
+                assert entry == None
+            else:
+                assert entry == None
+    except PermissionError:
+        print('ERROR: Permission error encountered. Make sure nothing in \'.\test\.pykeypass\' is open (including the folder itself.)')

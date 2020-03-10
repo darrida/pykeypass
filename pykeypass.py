@@ -23,7 +23,7 @@ def path_selection(test=False):
     pykeypass_folder = (Path.home() / '.pykeypass' if test == False else Path.cwd() / 'test' / '.pykeypass')
     pykeypass_app = pykeypass_folder / 'keepass.exe'
     pykeypass_db = pykeypass_folder / 'pykeepass.kdbx'
-    return [pykeypass_folder, pykeypass_app, pykeypass_db]
+    return pykeypass_folder, pykeypass_app, pykeypass_db
 
 
 @click.group()
@@ -43,10 +43,7 @@ def pykeypass_setup(test):
     - Creates pykeypass.kdbx in .pykeypass folder in hom directory
     """
     try:
-        path_variables = path_selection(test)
-        pykeypass_folder = path_variables[0]
-        pykeypass_app = path_variables[1]
-        pykeypass_db = path_variables[2]
+        pykeypass_folder, pykeypass_app, pykeypass_db = path_selection(test)
         if os.path.exists(pykeypass_app) == False:
             Path(pykeypass_folder).mkdir(parents=True, exist_ok=True)
             shutil.copyfile(Path.cwd() / 'thirdparty' / 'keepass_portable' / 'keepass.exe', pykeypass_app)
@@ -90,10 +87,7 @@ def keepass_open(database, setup, path, options, test, input_password=None):
         input_password (string, optional): Designed for use by the keepass_all() function further below. Defaults to None.
     """
     try:
-        path_variables = path_selection(test)
-        pykeypass_folder = path_variables[0]
-        pykeypass_app = path_variables[1]
-        pykeypass_db = path_variables[2]
+        pykeypass_folder, pykeypass_app, pykeypass_db = path_selection(test)
         if database == None:
             options = True
         if setup:
@@ -184,10 +178,7 @@ def keepass_all(test):
     """
     try:
         mode = ('-t' if test == True else '')
-        path_variables = path_selection(test)
-        pykeypass_folder = path_variables[0]
-        pykeypass_app = path_variables[1]
-        pykeypass_db = path_variables[2]
+        pykeypass_folder, pykeypass_app, pykeypass_db = path_selection(test)
         password = getpass.getpass('pykeepass password: ')
         kp = PyKeePass(pykeypass_db, password=password)
         groups = kp.find_groups(name='.', regex=True)
