@@ -41,8 +41,7 @@ pykeypass allows me to open the Command Prompt, type ```pykeypass all```, input 
    - Python 3.x must be installed (tested on Python 3.7 and 3.8)
 
 2. Download application files
-   - Option 1: Download and unzip the latest release
-   - Option 2: Clone the repository
+   - Download and unzip the latest release
 
 3. Install pykeypass (enable global command line availability)
    - Windows via script
