@@ -11,14 +11,6 @@ from pykeepass import PyKeePass
 import pykeepass as keepass
 
 
-########## GLOBAL VARIABLES ###########
-pykeypass_folder = Path.home() / '.pykeypass'
-pykeypass_app = pykeypass_folder / 'keepass.exe'
-pykeypass_db = pykeypass_folder / 'pykeepass.kdbx'
-########## PYTEST VARIABLES ###########
-test_pykeypass_folder = Path.cwd() / 'test' / '.pykeypass'
-
-
 def path_selection(test=False):
     pykeypass_folder = (Path.home() / '.pykeypass' if test == False else Path.cwd() / 'test' / '.pykeypass')
     pykeypass_app = pykeypass_folder / 'keepass.exe'
