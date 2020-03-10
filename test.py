@@ -175,6 +175,13 @@ def test_pykeypass_open_entry_non_existent():
     assert result.exit_code == 0
 
 
+def test_pykeypass_open_entry_invalid_password():
+    result = runner.invoke(cli, ['open', 'new_entry', '-t'],
+                           input=f'54321\n')
+    assert 'ERROR: pykeypass login information invalid.\n' in result.output
+    assert result.exit_code == 0
+
+
 def test_pykeypass_open_entry_no_key():
    result = runner.invoke(cli, ['open', 'new_entry', '-t'], input='12345\n')
    assert result.exit_code == 0
@@ -190,13 +197,6 @@ def test_pykeypass_all():
     assert result.exit_code == 0
     assert f'STATUS: new_entry keypass database launched successfully.' in result.output
     assert f'STATUS: new_entry_key keypass database launched successfully.' in result.output
-
-
-def test_pykeypass_open_entry_invalid_password():
-    result = runner.invoke(cli, ['open', 'new_entry', '-t'],
-                           input=f'54321\n')
-    assert 'ERROR: pykeypass login information invalid.\n' in result.output
-    assert result.exit_code == 0
 
 
 @pytest.mark.flaky(reruns=5, reruns_delay=2)

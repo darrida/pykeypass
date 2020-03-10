@@ -19,6 +19,13 @@ pykeypass_db = pykeypass_folder / 'pykeepass.kdbx'
 test_pykeypass_folder = Path.cwd() / 'test' / '.pykeypass'
 
 
+def path_selection(test=False):
+    pykeypass_folder = (Path.home() / '.pykeypass' if test == False else Path.cwd() / 'test' / '.pykeypass')
+    pykeypass_app = pykeypass_folder / 'keepass.exe'
+    pykeypass_db = pykeypass_folder / 'pykeepass.kdbx'
+    return [pykeypass_folder, pykeypass_app, pykeypass_db]
+
+
 @click.group()
 def cli():
     '''KEEPASS CLI TOOL
@@ -36,10 +43,10 @@ def pykeypass_setup(test):
     - Creates pykeypass.kdbx in .pykeypass folder in hom directory
     """
     try:
-        if test:
-            pykeypass_folder = test_pykeypass_folder
-            pykeypass_app = pykeypass_folder / 'keepass.exe'
-            pykeypass_db = pykeypass_folder / 'pykeepass.kdbx'
+        path_variables = path_selection(test)
+        pykeypass_folder = path_variables[0]
+        pykeypass_app = path_variables[1]
+        pykeypass_db = path_variables[2]
         if os.path.exists(pykeypass_app) == False:
             Path(pykeypass_folder).mkdir(parents=True, exist_ok=True)
             shutil.copyfile(Path.cwd() / 'thirdparty' / 'keepass_portable' / 'keepass.exe', pykeypass_app)
@@ -83,10 +90,10 @@ def keepass_open(database, setup, path, options, test, input_password=None):
         input_password (string, optional): Designed for use by the keepass_all() function further below. Defaults to None.
     """
     try:
-        if test:
-            pykeypass_folder = test_pykeypass_folder
-            pykeypass_app = pykeypass_folder / 'keepass.exe'
-            pykeypass_db = pykeypass_folder / 'pykeepass.kdbx'
+        path_variables = path_selection(test)
+        pykeypass_folder = path_variables[0]
+        pykeypass_app = path_variables[1]
+        pykeypass_db = path_variables[2]
         if database == None:
             options = True
         if setup:
@@ -172,22 +179,22 @@ def keepass_open(database, setup, path, options, test, input_password=None):
 
 @cli.command('all', help='Starts all configured Keepass databases.')
 @click.option('-t', '--test', 'test', is_flag=True, hidden=True)
-def keepass_all(test=''):
+def keepass_all(test):
     """Launches all database entries
     """
     try:
-        if test != '':
-            test = '-t'
-            pykeypass_folder = test_pykeypass_folder
-            pykeypass_app = pykeypass_folder / 'keepass.exe'
-            pykeypass_db = pykeypass_folder / 'pykeepass.kdbx'
+        mode = ('-t' if test == True else '')
+        path_variables = path_selection(test)
+        pykeypass_folder = path_variables[0]
+        pykeypass_app = path_variables[1]
+        pykeypass_db = path_variables[2]
         password = getpass.getpass('pykeepass password: ')
         kp = PyKeePass(pykeypass_db, password=password)
         groups = kp.find_groups(name='.', regex=True)
         if len(groups) > 1:
             for i in groups[1:]:
                 database_entry = str(i)[8:-2]
-                pipe_local = subprocess.Popen(f'pykeypass open {database_entry} -i {password} {test}', stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                pipe_local = subprocess.Popen(f'pykeypass open {database_entry} -i {password} {mode}', stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                 if pipe_local.communicate():
                     if pipe_local.returncode == 0:
                         click.echo(f'STATUS: {database_entry} keypass database launched successfully.')
