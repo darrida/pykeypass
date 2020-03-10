@@ -205,6 +205,10 @@ coverage html
     - Moved storage of configuration information to a ".pykeypass" folder in the home directory
     - Rewrote all install, uninstall, and Keepass entry setup processes to make it more straightforward and handle errors much more effectively (including a large number of responses that help the user setup things up correctly).
     - Requires much less understanding of the tool in order to use it.
+  - The fifth iteration  was the inclusion of unit tests
+    - I wrote 23 unit tests for pytest that achieved a coverage level of 94%.
+    - The process of writing the tests all necessitated refractoring a good deal of my code as well.
+    - In this process I also, for the first time, found a use for "multiple returns"
 
 ## Next steps
 
