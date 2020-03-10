@@ -190,24 +190,23 @@ coverage html
   - Needless to say, this was probably more complicated than it was worth, BUT I really enjoyed the challenge and satifaction of writing it. It also meant that I was able to enjoy that satisfaction everyday when I launched the Keepass databases my work depended on.
   - One of the major draw backs of this version is that I never updated it to take advantage of the Keepass command line support. The VBS script was literally launching the Keepass application, launching the open file dialogue, and tabbing and pasting strings into the interface. This was easily disrupted by other items loading during the initial login sequence.
 - **Python:** More recently, after using Python to varying degress for a good 3 years or so, I finally got around to rewriting the tool.
-  - The first iteration pretty much copied the hardcoded nature of the VBS version, but it took advantage of the Keepass command line support.
+  - **Iteration 1:** Mostly copied the hardcoded nature of the VBS version, but it took advantage of the Keepass command line support.
     - The big improvement was that all of launch/login activity took place before the fully logged in Keepass window appeared. It also was no longer interrupted by other loading processes.
     - This version incorperated no flexibility, as it was coded specifically for the Keepass files that I depended on.
-  - The second iteration was to incorperate more flexibility into one of the two files that I launch.
+  - **Iteration 2:** Incorperate more flexibility into one of the two files that I launch.
     - Why not both files? Well, that's primarily because there is one common file used by many people - the name and location never changes. The information related to that file I left hardcoded. This file also requires a security key file, which just takes a little more work to manage.
     - This version also included a rudementary wizard for configuring the one flexible file.
-  - The third iteration involved moving away from storing hashed (but reversible) passwords in a flat file.
+  - **Iteration 3:** Moved away from storing hashed (but reversible) passwords in a flat file.
     - I found pykeepass, a Python package that makes working with Keepass databases easy (<https://github.com/libkeepass/pykeepass).>
     - I used pykeepass to utilitize a Keepass database for the storage and retrieval of information I used to launch and login to the Keepass databases I depend on. A major benefit of this is depending on Keepass's own secure storage for storing sensitive information.
-  - The fourth interation was another major rewrite that allowed the creation of virtually unlimited Keepass database entries (both with and without security file keys).
+  - **Iteration 4:** Major rewrite that allowed the creation of virtually unlimited Keepass database entries (both with and without security file keys).
     - Removed all hardcoded elements
     - Moved storage of configuration information to a ".pykeypass" folder in the home directory
     - Rewrote all install, uninstall, and Keepass entry setup processes to make it more straightforward and handle errors much more effectively (including a large number of responses that help the user setup things up correctly).
     - Requires much less understanding of the tool in order to use it.
-  - The fifth iteration  was the inclusion of unit tests
+  - **Iteration 5:** Added unit tests
     - I wrote 23 unit tests for pytest that achieved a coverage level of 94%.
-    - The process of writing the tests all necessitated refractoring a good deal of my code as well.
-    - In this process I also, for the first time, found a use for "multiple returns"
+    - The process of writing the tests all necessitated refactoring a good deal of my code as well.
 
 ## Next steps
 
