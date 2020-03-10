@@ -1,4 +1,4 @@
-![Python application](https://github.com/darrida/pykeypass/workflows/Python%20application/badge.svg)
+![Build and Test](https://github.com/darrida/pykeypass/workflows/Python%20application/badge.svg)
 
 # pykeypass
 
