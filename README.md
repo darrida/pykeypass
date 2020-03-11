@@ -1,6 +1,6 @@
 ![Build/Test](https://github.com/darrida/pykeypass/workflows/Build/Test/badge.svg?branch=master)
 
-![Coverage](https://github.com/darrida/pykeypass/master/coverage.svg)
+![Coverage](https://github.com/darrida/pykeypass/blob/master/coverage.svg)
 
 .. image:: https://github.com/darrida/pykeypass/master/coverage.svg
     :alt: Coverage
