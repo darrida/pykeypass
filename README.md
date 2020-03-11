@@ -3,9 +3,6 @@
 [Build/Test]: https://github.com/darrida/pykeypass/workflows/Build/Test/badge.svg?branch=master "Build/Test"
 [Coverage]: https://github.com/darrida/pykeypass/blob/master/coverage.svg "Testing Coverage"
 
-![Build/Test](https://github.com/darrida/pykeypass/workflows/Build/Test/badge.svg?branch=master)
-![Coverage](https://github.com/darrida/pykeypass/blob/master/coverage.svg)
-
 # pykeypass
 
 pykeypass (because pykeepass was already taken) uses the pykeepass library to setup to specify and quickly launch multiple Keepass databases
