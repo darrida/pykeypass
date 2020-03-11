@@ -1,5 +1,10 @@
 ![Build/Test](https://github.com/darrida/pykeypass/workflows/Build/Test/badge.svg?branch=master)
 
+![Coverage](https://github.com/darrida/pykeypass/master/coverage.svg)
+
+.. image:: https://github.com/darrida/pykeypass/master/coverage.svg
+    :alt: Coverage
+
 # pykeypass
 
 pykeypass (because pykeepass was already taken) uses the pykeepass library to setup to specify and quickly launch multiple Keepass databases
@@ -18,7 +23,6 @@ pykeypass (because pykeepass was already taken) uses the pykeepass library to se
     - [Open individual Keepass database](#open-individual-keepass-database)
     - [Show list of configured databases](#show-list-of-configured-databases)
     - [Show path of individual configured database](#show-path-of-individual-configured-database)
-    - [Show list of configured configured database entries](#show-list-of-configured-configured-database-entries)
   - [Testing](#testing)
   - [Notes about development history](#notes-about-development-history)
   - [Next steps](#next-steps)
