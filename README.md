@@ -1,9 +1,10 @@
+![alt text][Build/Test] ![alt text][Coverage]
+
+[Build/Test]: https://github.com/darrida/pykeypass/workflows/Build/Test/badge.svg?branch=master "Build/Test"
+[Coverage]: https://github.com/darrida/pykeypass/blob/master/coverage.svg "Testing Coverage"
+
 ![Build/Test](https://github.com/darrida/pykeypass/workflows/Build/Test/badge.svg?branch=master)
-
 ![Coverage](https://github.com/darrida/pykeypass/blob/master/coverage.svg)
-
-.. image:: https://github.com/darrida/pykeypass/master/coverage.svg
-    :alt: Coverage
 
 # pykeypass
 
