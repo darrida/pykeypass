@@ -10,7 +10,7 @@ from click import group as cgroup, option as coption, echo as cecho, \
     argument as cargument
 from pykeepass import PyKeePass, create_database
 from pykeepass import exceptions as pyexceptions
-
+import pykeepass
 
 def path_selection(test=False):
     """Setup path variables for pykeypass
@@ -59,13 +59,13 @@ def pykeypass_setup(test):
             cecho('STEP 1: Create pykeypass app database.')
             new_password = getpass.getpass('Create a pykeypass password: ')
             create_database(pykeypass_db, password=new_password)
-            kp = PyKeePass(pykeypass_db, password=new_password)
+            PyKeePass(pykeypass_db, password=new_password)
             cecho("DONE: pykeypass app database created.\n"
                     "Setup keepass databases by using:\n"
                     "- 'pykeypass open <new_name> -s'\n")
         else:
             cecho('pykeypass setup cancelled.')
-    except FileNotFoundError as e:
+    except FileNotFoundError:
         cecho("""ERROR: pykeypass app not setup. To setup, perform one of the following:
 (1) Run 'install.bat' from pykeypass app folder.
 (2) Open CMD/terminal in root of pykeypass app directory and run 'pykeypass setup' (all other functionality is global)""")
@@ -198,3 +198,5 @@ def keepass_all(test):
         cecho('ERROR: pykeepass app database not found. Use \'pykeypass setup\' to get started.\n')
     except subprocess.CalledProcessError as e:
         cecho(e)
+    except pyexceptions.CredentialsIntegrityError as e:    
+        cecho(f'ERROR: pykeypass login information invalid.\n')
