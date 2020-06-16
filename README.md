@@ -2,7 +2,7 @@
 
 [Build/Test]: https://github.com/darrida/pykeypass/workflows/Build/Test/badge.svg?branch=master "Build/Test"
 
-[Python 3.6]: https://github.com/darrida/pykeypass/workflows/Python%203.6/badge.svg "Python 3.6"
+[Python 3.6]: https://github.com/darrida/pykeypass/workflows/Python%203.6/badge.svg?branch=master "Python 3.6"
 
 [Coverage]: https://github.com/darrida/pykeypass/blob/master/coverage.svg "Testing Coverage"
 
