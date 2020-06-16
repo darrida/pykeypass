@@ -1,4 +1,4 @@
-![alt text][python 3.6]  ![alt text][Python 3.7]  ![alt text][Python 3.8]  ![alt text][coverage]
+![alt text][python 3.6]  ![alt text][python 3.7]  ![alt text][python 3.8]  ![alt text][coverage]
 
 
 [python 3.6]: https://github.com/darrida/pykeypass/workflows/python%203.6%20/badge.svg?branch=master "python 3.6"
