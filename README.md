@@ -1,10 +1,10 @@
-![alt text][python 3.6]  ![alt text][Python 3.7]  ![alt text][Python 3.8]  ![alt text][Coverage]
+![alt text][python 3.6]  ![alt text][Python 3.7]  ![alt text][Python 3.8]  ![alt text][coverage]
 
 
 [python 3.6]: https://github.com/darrida/pykeypass/workflows/python%203.6%20/badge.svg?branch=master "python 3.6"
-[Python 3.7]: https://github.com/darrida/pykeypass/workflows/Python%203.7/badge.svg?branch=master "Python 3.7"
-[Python 3.8]: https://github.com/darrida/pykeypass/workflows/Python%203.8/badge.svg?branch=master "Python 3.8"
-[Coverage]: https://github.com/darrida/pykeypass/blob/master/coverage.svg "Testing Coverage"
+[python 3.7]: https://github.com/darrida/pykeypass/workflows/python%203.7%20/badge.svg?branch=master "python 3.7"
+[python 3.8]: https://github.com/darrida/pykeypass/workflows/python%203.8%20/badge.svg?branch=master "python 3.8"
+[coverage]: https://github.com/darrida/pykeypass/blob/master/coverage.svg "testing coverage"
 
 # pykeypass
 
