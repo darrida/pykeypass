@@ -58,12 +58,6 @@ pykeypass allows me to open the Command Prompt, type ```pykeypass all```, input 
      - Open CMD from the pykeypass directory
      - Run ```pip install --editable .```
      - Run ```pykeypass setup```
-   
-   - Linux (*not yet working*)
-     - Ideally, the following should work (but does not)
-     - Open the terminal from the pykeypass directory
-     - Run ```pip3 install -editable .```
-     - Run ```pykeypass setup```
 
 ### Remove
 

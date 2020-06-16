@@ -8,3 +8,4 @@ cpython-3*
 htmlcov
 test.cpython.*
 build
+.pytest_cache
