@@ -39,9 +39,7 @@ def test_ci_setup():
         if entry != None:
             kp.delete_entry('new_entry')
             entry = kp.find_entries(title=f'new_entry', first=True)
-            assert entry == None
-        else:
-            assert entry == None
+        assert entry is None
     else:
         assert False
     if os.path.exists(test_dir / '.pykeypass'):
