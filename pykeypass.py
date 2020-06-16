@@ -92,7 +92,7 @@ def keepass_open(database, setup, path, options, test, input_password=None):
     """
     try:
         pykeypass_folder, pykeypass_app, pykeypass_db = path_selection(test)
-        if database == None:
+        if database is None:
             options = True
         if setup:
             try:
@@ -101,13 +101,13 @@ def keepass_open(database, setup, path, options, test, input_password=None):
                 kp = PyKeePass(pykeypass_db, password=password)
                 group = kp.find_groups(kp.root_group, f'{database}')
                 entry = kp.find_entries(title=f'{database}', first=True)
-                if entry != None:
+                if entry is None:
+                    confirmation = 'y'
+                else:
                     confirmation = input(f'WARNING: An entry for {database} already exists, this process will delete it and create a fresh one.\nProceed? (y/n) ')
                     kp.delete_entry(entry)
                     kp.delete_group(group)
                     kp.save()
-                else:
-                    confirmation = 'y'
                 if confirmation == 'y':
                     kp = PyKeePass(pykeypass_db, password=password)
                     keepass_url = input(f'Set {database} Keepass url: ')
@@ -147,7 +147,12 @@ def keepass_open(database, setup, path, options, test, input_password=None):
                 cecho(f'ISSUE: All or part of the {database} Keepass entry was not found.\nFIX: Setup this entry using: "pykeypass open {database} -s"')
         else:
             try:
-                password = getpass.getpass('pykeepass password: ') if input_password == None else input_password
+                password = (
+                    getpass.getpass('pykeepass password: ')
+                    if input_password is None
+                    else input_password
+                )
+
                 kp = PyKeePass(pykeypass_db, password=password)
                 entry = kp.find_entries(title=f'{database}', first=True)
                 if entry.get_custom_property('key') != None:
@@ -163,7 +168,7 @@ def keepass_open(database, setup, path, options, test, input_password=None):
                 cecho(f'ERROR: Setup item for {database} file missing or incorrect')
                 if str(e) == "'NoneType' object has no attribute 'url'":
                     cecho(f'ISSUE: It looks like there is no url configured for the {database} Keepass database.')
-                elif entry == None:
+                elif entry is None:
                     cecho(f'ISSUE: All or part of the {database} Keepass entry was not found.\nFIX: Setup this entry using: "pykeypass open {database} -s"')
                 else:
                     cecho(f'Error message: {e}')
@@ -188,9 +193,8 @@ def keepass_all(test):
             for i in groups[1:]:
                 database_entry = str(i)[8:-2]
                 pipe_local = subprocess.Popen(f'pykeypass open {database_entry} -i {password} {mode}', stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-                if pipe_local.communicate():
-                    if pipe_local.returncode == 0:
-                        cecho(f'STATUS: {database_entry} keypass database launched successfully.')
+                if pipe_local.communicate() and pipe_local.returncode == 0:
+                    cecho(f'STATUS: {database_entry} keypass database launched successfully.')
         else:
             cecho('NOTICE: No entry created. Use \'pykeypass open <new_name> -s\''
                 + 'to get started.')

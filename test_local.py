@@ -39,9 +39,7 @@ def test_ci_setup():
         if entry != None:
             kp.delete_entry('new_entry')
             entry = kp.find_entries(title=f'new_entry', first=True)
-            assert entry == None
-        else:
-            assert entry == None
+        assert entry is None
     else:
         assert False
     if os.path.exists(test_dir / '.pykeypass'):
@@ -203,8 +201,6 @@ def test_teardown_install_files():
     try:
         time.sleep(5)
         pipe_local = subprocess.Popen('taskkill /IM Keepass.exe', stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        if pipe_local.communicate():
-            pass
         time.sleep(2)
         if os.path.exists(test_dir / '.pykeypass'):
             shutil.rmtree(test_dir / '.pykeypass')
@@ -215,9 +211,7 @@ def test_teardown_install_files():
             if entry != None:
                 kp.delete_entry('new_entry')
                 entry = kp.find_entries(title=f'new_entry', first=True)
-                assert entry == None
-            else:
-                assert entry == None
+            assert entry is None
     except PermissionError:
         print('ERROR: Permission error encountered. Make sure nothing in \'.\test\.pykeypass\' is open (including the folder itself.)')
-        assert 2 + 3 == 6
+        assert 2 == 3
