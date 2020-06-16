@@ -1,9 +1,12 @@
-![alt text][python 3.6]  ![alt text][python 3.7]  ![alt text][python 3.8]  ![alt text][coverage]
+![alt text][python 3.6]  ![alt text][python 3.7]  ![alt text][python 3.8]  ![alt text][pypy3]
+
+![alt text][coverage]
 
 
 [python 3.6]: https://github.com/darrida/pykeypass/workflows/python%203.6%20/badge.svg?branch=master "python 3.6"
 [python 3.7]: https://github.com/darrida/pykeypass/workflows/python%203.7%20/badge.svg?branch=master "python 3.7"
 [python 3.8]: https://github.com/darrida/pykeypass/workflows/python%203.8%20/badge.svg?branch=master "python 3.8"
+[pypy3 ]: https://github.com/darrida/pykeypass/workflows/pypy3%20/badge.svg?branch=master "pypy3"
 [coverage]: https://github.com/darrida/pykeypass/blob/master/coverage.svg "testing coverage"
 
 # pykeypass
