@@ -1,4 +1,3 @@
-pip install pipx
-REM pip install --editable .
+pip install --editable .
 pipx install .
 pykeypass setup
