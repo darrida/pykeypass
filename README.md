@@ -1,4 +1,4 @@
-![alt text][Build/Test] ![alt text][Coverage]
+![alt text][Build/Test] ![alt text][Python 3.6]  ![alt text][Coverage]
 
 [Build/Test]: https://github.com/darrida/pykeypass/workflows/Build/Test/badge.svg?branch=master "Build/Test"
 
