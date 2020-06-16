@@ -2,7 +2,7 @@
 
 [Python 3.6]: https://github.com/darrida/pykeypass/workflows/Python%203.6/badge.svg?branch=master "Python 3.6"
 [Python 3.7]: https://github.com/darrida/pykeypass/workflows/Python%203.7/badge.svg?branch=master "Python 3.7"
-[Python 3.8]: https://github.com/darrida/pykeypass/workflows/Python%203.7/badge.svg?branch=master "Python 3.8"
+[Python 3.8]: https://github.com/darrida/pykeypass/workflows/Python%203.8/badge.svg?branch=master "Python 3.8"
 [Coverage]: https://github.com/darrida/pykeypass/blob/master/coverage.svg "Testing Coverage"
 
 # pykeypass
