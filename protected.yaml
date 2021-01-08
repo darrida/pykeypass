@@ -1,0 +1,21 @@
+prod:
+  secret-user1: AAoNldybyiIeATXdv09u/eGePxPS8oLq0aKJlYOR0O84RYGT6k0SLOAEis22BPmXJ+0mhdCzFgepEO+c
+  meta:
+    public-key: AKOaYhCxwWC0PXFy/ww6oDm2cTYdezWQwnkeKLpXEvYc
+    owners:
+      darrida.py@gmail.com: AHSCod1U6+3ZfXRpFXePV1DojeFLTzkCe5BR9i4zjylhc4cFktuIm23W4gKC1LLB6mS/dEd4tnnsKqcUwlQ5lnEwzxx8PUwWhFH4Cr4mdjFk
+test:
+  secret-user1: APYIcYA9ft5msazLrw/3QHbjMThxPKCDRpu+9DhNG3FYN/dq2rXaG3o5kqteRGSI5mtleMQdR1+8pTA5
+  meta:
+    public-key: AN2QhQ7h1M4+LhjMYlpczqW28Uw3zl2zXPKGay9pdioT
+    owners:
+      darrida.py@gmail.com: AJuDuf17yFblfcF3ZZ2o3HpXPZHKyFc4pwzNB0ygn7xicVuF/LdDrK3l+pUAfxqYsOjXYEkTRy91xMLrl379IFitSgiHcE388P6E7Do63bL2
+key-custodians:
+  darrida.py@gmail.com:
+    pwdkm: AJTERB+60UGWCysoOAgeUoe78RU2GNmV1RkYVjVfueBoiTI6yNqyxlA=
+audit-log:
+- 2020-10-10T23:03:17Z -- created key custodian darrida.py@gmail.com
+- 2020-10-10T23:38:20Z -- created domain prod with owner darrida.py@gmail.com
+- 2020-10-10T23:45:22Z -- added secret user1 in prod
+- 2020-10-10T23:46:15Z -- created domain test with owner darrida.py@gmail.com
+- 2020-10-10T23:46:30Z -- added secret user1 in test
