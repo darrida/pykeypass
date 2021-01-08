@@ -39,4 +39,4 @@ jobs:
     - name: Test with pytest
       run: |
         pip install pytest
-        pytest -v test_github.py
+        pytest -v test/test_github.py
