@@ -4,6 +4,7 @@
 [python 3.6]: https://github.com/darrida/pykeypass/workflows/python%203.6%20/badge.svg?branch=master "python 3.6"
 [python 3.7]: https://github.com/darrida/pykeypass/workflows/python%203.7%20/badge.svg?branch=master "python 3.7"
 [python 3.8]: https://github.com/darrida/pykeypass/workflows/python%203.8%20/badge.svg?branch=master "python 3.8"
+[python 3.9]: https://github.com/darrida/pykeypass/workflows/python%203.9%20/badge.svg?branch=master "python 3.9"
 [coverage]: https://github.com/darrida/pykeypass/blob/master/coverage.svg "testing coverage"
 
 # pykeypass
