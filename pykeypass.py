@@ -71,7 +71,7 @@ def pykeypass_setup(test):
 
 
 @cli.command('list', help='Lists available databases to open.')
-@coption('-i', '--input_password', 'input_password', hidden=True help="Reserved for use with 'pykeepass all'")
+@coption('-i', '--input_password', 'input_password', hidden=True, help="Reserved for use with 'pykeepass all'")
 @coption('-t', '--test', 'test', is_flag=True, hidden=True)
 def keepass_list(test, input_password=None):
     """Lists available Keepass databases to launch.
@@ -133,7 +133,7 @@ def keepass_manage(database, test, input_password=None):
 
 @cli.command('open', help='Launches requested Keepass database.')
 @cargument('database', required=False)
-@coption('-i', '--input_password', 'input_password', help="Reserved for use with 'pykeepass all'")
+@coption('-i', '--input_password', 'input_password', hidden=True, help="Reserved for use with 'pykeepass all'")
 @coption('-t', '--test', 'test', is_flag=True, hidden=True)
 def keepass_open(database, test, input_password=None):
     """Launches requested Keepass database.
@@ -184,7 +184,7 @@ def keepass_open(database, test, input_password=None):
 
 @cli.command('path', help='Launches functionality for a specific Keepass database.')
 @cargument('database', required=True)
-@coption('-i', '--input_password', 'input_password', help="Reserved for use with 'pykeepass all'")
+@coption('-i', '--input_password', 'input_password', hidden=True, help="Reserved for use with 'pykeepass all'")
 @coption('-t', '--test', 'test', is_flag=True, hidden=True)
 def keepass_path(database, setup, path, options, test, input_password=None):
     """Shows file(s) for database entry.
