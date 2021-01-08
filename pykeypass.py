@@ -8,9 +8,9 @@ from shutil import copyfile
 # PYPI
 from click import group as cgroup, option as coption, echo as cecho, \
     argument as cargument
-#from pykeepass import PyKeePass, create_database
-#from pykeepass import exceptions as pyexceptions
-#import pykeepass
+from pykeepass import PyKeePass, create_database
+from pykeepass import exceptions as pyexceptions
+import pykeepass
 
 def path_selection(test=False):
     """Setup path variables for pykeypass
@@ -140,44 +140,33 @@ def keepass_open(database, test, input_password=None):
     """
     try:
         pykeypass_folder, pykeypass_app, pykeypass_db = path_selection(test)
-        if database is None:
-            options = True
-        elif options:
-            kp = PyKeePass(pykeypass_db, password=getpass.getpass('pykeypass password: '))
-            groups = kp.find_groups(name='.', regex=True)
-            cecho('ENTRIES AVAILABLE: ')
-            for i in groups[1:]:
-                if str(i)[8:-2] != 'Recycle Bin':
-                    print(str(i)[8:-2])
-        else:
-            try:
-                password = (
-                    getpass.getpass('pykeepass password: ')
-                    if input_password is None
-                    else input_password
-                )
+        password = (
+            getpass.getpass('pykeepass password: ')
+            if input_password is None
+            else input_password
+        )
 
-                kp = PyKeePass(pykeypass_db, password=password)
-                entry = kp.find_entries(title=f'{database}', first=True)
-                if entry.get_custom_property('key') != None:
-                    key_file = entry.get_custom_property('key')
-                    subprocess.Popen(f'{pykeypass_app} "{entry.url}" -pw:{entry.password} -keyfile:"{key_file}"',
-                                     stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-                else:
-                    subprocess.Popen(f'{pykeypass_app} "{entry.url}" -pw:{entry.password}', 
-                                     stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            except pyexceptions.CredentialsIntegrityError as e:    
-                cecho('ERROR: pykeypass login information invalid.\n')
-            except AttributeError as e:
-                cecho(f'ERROR: Setup item for {database} file missing or incorrect')
-                if str(e) == "'NoneType' object has no attribute 'url'":
-                    cecho(f'ISSUE: It looks like there is no url configured for the {database} Keepass database.')
-                elif entry is None:
-                    cecho(f'ISSUE: All or part of the {database} Keepass entry was not found.\nFIX: Setup this entry using: "pykeypass open {database} -s"')
-                else:
-                    cecho(f'Error message: {e}')
-            except subprocess.CalledProcessError as e:
-                cecho(e)
+        kp = PyKeePass(pykeypass_db, password=password)
+        entry = kp.find_entries(title=f'{database}', first=True)
+        if entry.get_custom_property('key') != None:
+            key_file = entry.get_custom_property('key')
+            subprocess.Popen(f'{pykeypass_app} "{entry.url}" -pw:{entry.password} -keyfile:"{key_file}"',
+                                stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        else:
+            subprocess.Popen(f'{pykeypass_app} "{entry.url}" -pw:{entry.password}', 
+                                stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    except pyexceptions.CredentialsIntegrityError as e:    
+        cecho('ERROR: pykeypass login information invalid.\n')
+    except AttributeError as e:
+        cecho(f'ERROR: Setup item for {database} file missing or incorrect')
+        if str(e) == "'NoneType' object has no attribute 'url'":
+            cecho(f'ISSUE: It looks like there is no url configured for the {database} Keepass database.')
+        elif entry is None:
+            cecho(f'ISSUE: All or part of the {database} Keepass entry was not found.\nFIX: Setup this entry using: "pykeypass open {database} -s"')
+        else:
+            cecho(f'Error message: {e}')
+    except subprocess.CalledProcessError as e:
+        cecho(e)
     except FileNotFoundError as e:
         cecho("ERROR: pykeepass app database not found. Use 'pykeypass setup' to get started.\n")
 
@@ -186,7 +175,7 @@ def keepass_open(database, test, input_password=None):
 @cargument('database', required=True)
 @coption('-i', '--input_password', 'input_password', hidden=True, help="Reserved for use with 'pykeepass all'")
 @coption('-t', '--test', 'test', is_flag=True, hidden=True)
-def keepass_path(database, setup, path, options, test, input_password=None):
+def keepass_path(database, test, input_password=None):
     """Shows file(s) for database entry.
     """
     try:

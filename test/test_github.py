@@ -96,25 +96,25 @@ def test_ci_pykeypass_all_db_empty():
 
 
 def test_ci_pykeypass_create_entry_invalid_password():
-    result = runner.invoke(cli, ['open', 'new_entry', '-s', '-t'],
+    result = runner.invoke(cli, ['manage', 'new_entry', '-t'],
                            input=f'54321\n')
     assert 'ERROR: pykeypass login information invalid.\n' in result.output
     assert result.exit_code == 0
 
 
 def test_ci_pykeypass_create_entry_no_key():
-    result = runner.invoke(cli, ['open', 'new_entry', '-s', '-t'],
+    result = runner.invoke(cli, ['manage', 'new_entry', '-t'],
                            input=f'12345\n{test_database_no_key}\n12345\nn\n')
     assert result.exit_code == 0
 
 
 def test_ci_pykeypass_path_no_key():
-    result = runner.invoke(cli, ['open', 'new_entry', '-p', '-t'], input='12345\n')
+    result = runner.invoke(cli, ['path', 'new_entry', '-t'], input='12345\n')
     assert str(test_database_no_key) in result.output
 
 
 def test_ci_pykeypass_create_entry_with_key():
-    result = runner.invoke(cli, ['open', 'new_entry_key', '-s', '-t'],
+    result = runner.invoke(cli, ['manage', 'new_entry_key', '-t'],
                            input=f'12345\n'
                                + f'{test_database_with_key}\n'
                                + f'12345\n'
@@ -124,7 +124,7 @@ def test_ci_pykeypass_create_entry_with_key():
 
 
 def test_ci_pykeypass_path_with_key():
-    result = runner.invoke(cli, ['open', 'new_entry_key', '-p', '-t'],
+    result = runner.invoke(cli, ['path', 'new_entry_key', '-t'],
                             input='12345\n')
     assert str(test_database_with_key) in result.output
     assert str(test_database_with_key_key) in result.output
@@ -132,32 +132,32 @@ def test_ci_pykeypass_path_with_key():
 
 
 def test_ci_pykeypass_db_invalid_password():
-    result = runner.invoke(cli, ['open', 'new_entry', '-t'], input='54321\n')
+    result = runner.invoke(cli, ['manage', 'new_entry', '-t'], input='54321\n')
     assert 'ERROR: pykeypass login information invalid.\n' in result.output
 
 
 def test_ci_pykeypass_list_entries():
-    result = runner.invoke(cli, ['open', '-o', '-t'], input='12345\n')
+    result = runner.invoke(cli, ['list', '-t'], input='12345\n')
     assert result.exit_code == 0
     assert 'ENTRIES AVAILABLE: \nnew_entry\nnew_entry_key' in result.output
 
 
 def test_ci_pykeypass_create_no_key_replace():
-    result = runner.invoke(cli, ['open', 'new_entry', '-s', '-t'],
+    result = runner.invoke(cli, ['manage', 'new_entry', '-t'],
                            input=f'12345\ny\n{test_database_no_key}\n12345\nn\n')
     assert result.exit_code == 0
 
 
 @pytest.mark.filterwarnings("ignore:GetPassWarning")
 def test_ci_pykeypass_path_invalid_password():
-    result = runner.invoke(cli, ['open', 'new_entry', '-p', '-t'],
+    result = runner.invoke(cli, ['path', 'new_entry', '-t'],
                            input=f'54321\n')
     assert 'ERROR: pykeypass login information invalid.\n' in result.output
     assert result.exit_code == 0
 
 
 def test_ci_pykeypass_path_entry_non_existent():
-    result = runner.invoke(cli, ['open', 'new_entry_fake', '-p', '-t'],
+    result = runner.invoke(cli, ['path', 'new_entry_fake', '-t'],
                            input=f'12345\n')
     assert ('ISSUE: All or part of the new_entry_fake Keepass entry was not found.\n'
           + 'FIX: Setup this entry using: "pykeypass open new_entry_fake -s"') in result.output
