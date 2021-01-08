@@ -95,6 +95,7 @@ def test_ci_pykeypass_all_db_empty():
     assert 'NOTICE: No entry created. Use \'pykeypass open <new_name> -s\'' in result.output
 
 
+@pytest.mark.filterwarnings("ignore:GetPassWarning")
 def test_ci_pykeypass_create_entry_invalid_password():
     result = runner.invoke(cli, ['manage', 'new_entry', '-t'],
                            input=f'54321\n')

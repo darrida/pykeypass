@@ -9,7 +9,7 @@ from shutil import copyfile
 from click import group as cgroup, option as coption, echo as cecho, \
     argument as cargument
 from pykeepass import PyKeePass, create_database
-from pykeepass import exceptions as pyexceptions
+from pykeepass import exceptions as CredentialsIntegrityError
 import pykeepass
 
 def path_selection(test=False):
@@ -84,6 +84,8 @@ def keepass_list(test, input_password=None):
         for i in groups[1:]:
             if str(i)[8:-2] != 'Recycle Bin':
                 print(str(i)[8:-2])
+    except pykeepass.exceptions.CredentialsError as e:
+        cecho('ERROR: pykeypass login information invalid.\n')
     except FileNotFoundError as e:
         cecho("ERROR: pykeepass app database not found. Use 'pykeypass setup' to get started.\n")
 
@@ -125,14 +127,14 @@ def keepass_manage(database, test, input_password=None):
         kp.save()
         cecho(f'DONE: {database} keepass password setup.')
         cecho(f'Try launching with "pykeypass open {database}", or "pykeypass all"')
-    except pyexceptions.CredentialsIntegrityError as e:
+    except pykeepass.exceptions.CredentialsError as e:
         cecho('ERROR: pykeypass login information invalid.\n')
     except FileNotFoundError:
         cecho('ERROR: pykeepass app database not found. Use \'pykeypass setup\' to get started.\n')
 
 
 @cli.command('open', help='Launches requested Keepass database.')
-@cargument('database', required=False)
+@cargument('database', required=True)
 @coption('-i', '--input_password', 'input_password', hidden=True, help="Reserved for use with 'pykeepass all'")
 @coption('-t', '--test', 'test', is_flag=True, hidden=True)
 def keepass_open(database, test, input_password=None):
@@ -155,7 +157,7 @@ def keepass_open(database, test, input_password=None):
         else:
             subprocess.Popen(f'{pykeypass_app} "{entry.url}" -pw:{entry.password}', 
                                 stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    except pyexceptions.CredentialsIntegrityError as e:    
+    except pykeepass.exceptions.CredentialsError as e:
         cecho('ERROR: pykeypass login information invalid.\n')
     except AttributeError as e:
         cecho(f'ERROR: Setup item for {database} file missing or incorrect')
@@ -169,6 +171,8 @@ def keepass_open(database, test, input_password=None):
         cecho(e)
     except FileNotFoundError as e:
         cecho("ERROR: pykeepass app database not found. Use 'pykeypass setup' to get started.\n")
+    except construct.core.ChecksumError as e:
+        cecho('ERROR: pykeypass login information invalid.\n')
 
 
 @cli.command('path', help='Launches functionality for a specific Keepass database.')
@@ -186,7 +190,7 @@ def keepass_path(database, test, input_password=None):
         if entry.get_custom_property('key'):
             key_name = entry.get_custom_property('key')
             cecho(f'{database.upper()} KEY: {key_name}')
-    except pyexceptions.CredentialsIntegrityError as e:
+    except pykeepass.exceptions.CredentialsError as e:
         cecho('ERROR: pykeypass login information invalid.\n')
     except AttributeError as e:
         cecho(f'ISSUE: All or part of the {database} Keepass entry was not found.\nFIX: Setup this entry using: "pykeypass open {database} -s"')
@@ -214,11 +218,13 @@ def keepass_all(test):
         else:
             cecho('NOTICE: No entry created. Use \'pykeypass open <new_name> -s\''
                 + 'to get started.')
+    except pykeepass.exceptions.CredentialsError as e:
+        cecho('ERROR: pykeypass login information invalid.\n')
     except FileNotFoundError:
         cecho('ERROR: pykeepass app database not found. Use \'pykeypass setup\' to get started.\n')
     except subprocess.CalledProcessError as e:
         cecho(e)
-    except pyexceptions.CredentialsIntegrityError as e:    
+    except CredentialsIntegrityError as e:    
         cecho(f'ERROR: pykeypass login information invalid.\n')
 
 
