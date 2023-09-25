@@ -9,3 +9,5 @@ htmlcov
 test.cpython.*
 build
 .pytest_cache
+.venv/
+lxml-*/

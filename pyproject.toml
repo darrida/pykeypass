@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "pykeypass"
+version = "0.1.0"
+description = ""
+authors = ["darrida <darrida.py@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+click = "^8.1.7"
+lxml = "^4.9.3"
+pykeepass = "^4.0.6"
+
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.0.291"
+black = "^23.9.1"
+
+[tool.ruff]
+# Same as Black.
+line-length = 100
+
+[tool.black]
+line-length = 100
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
