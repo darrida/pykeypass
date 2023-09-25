@@ -57,7 +57,7 @@ def test_ci_pykeypass_all_no_db():
 
 def test_ci_pykeypass_setup():
     """Test pykeypass setup."""
-    result = runner.invoke(cli, ["setup", "-t"], input="12345")
+    result = runner.invoke(cli, ["setup", "-t"], input="12345\n")
     assert result.exit_code == 0
     assert not result.exception
     assert "STEP 1: Create pykeypass app database." in result.output
