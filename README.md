@@ -97,7 +97,7 @@ Setup keepass databases by using:
 ### Setup a new Keypass database entry
 
 ```cmd
-pykeypass open <new_entry> -s
+pykeypass manage <new_entry>
 ```
 
 - pykeypass will walk through the following:
@@ -107,7 +107,7 @@ pykeypass open <new_entry> -s
 - Standard Example:
 
 ```cmd
-C:\> pykeypass open <new_entry> -s
+C:\> pykeypass manage <new_entry>
 START: Setup database_with_key keepass.
 pykeypass password:
 Set new_entry Keepass url: C:\Users\<user>\Documents\database.kdbx
@@ -120,7 +120,7 @@ Try launching with "pykeepass open local"
 - Example with paired security key:
 
 ```cmd
-C:\> pykeypass open <new_entry> -s
+C:\> pykeypass manage <new_entry>
 START: Setup database_with_key keepass.
 pykeypass password:
 Set database_with_key Keepass url: C:\Users\<user>\Documents\database.kdbx
@@ -128,13 +128,7 @@ Set database_with_key Keepass Password:
 Does this Keepass database use a key file? (y/n) y
 Set key file (file path + file name): C:\Users\<user>\Documents\database.key
 DONE: database_with_key keepass password setup.
-Try launching with "pykeypass open database_with_key", or "pykeypass all"
-```
-
-### Open all Keepass databases
-
-```cmd
-pykeypass all
+Try launching with "pykeypass open database_with_key"
 ```
 
 ### Open individual Keepass database

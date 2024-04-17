@@ -43,13 +43,13 @@ def test_ci_setup():
     assert os.path.exists(test_dir / ".pykeypass") is False
 
 
-def test_ci_pykeypass_all_no_db():
-    result = runner.invoke(cli, ["all", "-t"], input="12345\n")
-    assert result.exit_code == 0
-    assert (
-        "ERROR: pykeepass app database not found. Use 'pykeypass setup' to get started.\n"
-        in result.output
-    )
+# def test_ci_pykeypass_all_no_db():
+#     result = runner.invoke(cli, ["all", "-t"], input="12345\n")
+#     assert result.exit_code == 0
+#     assert (
+#         "ERROR: pykeepass app database not found. Use 'pykeypass setup' to get started.\n"
+#         in result.output
+#     )
 
 
 def test_ci_pykeypass_setup():
@@ -96,10 +96,10 @@ def test_ci_pykeypass_setup_again_replace():
     ) in result.output
 
 
-def test_ci_pykeypass_all_db_empty():
-    result = runner.invoke(cli, ["all", "-t"], input="12345\n")
-    assert result.exit_code == 0
-    assert "NOTICE: No entry created. Use 'pykeypass open <new_name> -s'" in result.output
+# def test_ci_pykeypass_all_db_empty():
+#     result = runner.invoke(cli, ["all", "-t"], input="12345\n")
+#     assert result.exit_code == 0
+#     assert "NOTICE: No entry created. Use 'pykeypass open <new_name> -s'" in result.output
 
 
 def test_ci_pykeypass_create_entry_invalid_password():
@@ -200,8 +200,8 @@ def test_ci_pykeypass_open_entry_with_key():
     assert result.exit_code == 0
 
 
-def test_ci_pykeypass_all():
-    result = runner.invoke(cli, ["all", "-t"], input="12345\n")
-    assert result.exit_code == 0
+# def test_ci_pykeypass_all():
+#     result = runner.invoke(cli, ["all", "-t"], input="12345\n")
+#     assert result.exit_code == 0
     # assert f'STATUS: new_entry keypass database launched successfully.' in result.output
     # assert f'STATUS: new_entry_key keypass database launched successfully.' in result.output

@@ -1,30 +1,42 @@
-[tool.poetry]
+[project]
 name = "pykeypass"
-version = "0.1.0"
+version = "2024.04.17"
 description = ""
-authors = ["darrida <darrida.py@gmail.com>"]
-license = "MIT"
+authors = [
+    {name="bh", email="bhammond@waubonsee.edu"}
+]
 readme = "README.md"
+requires-python = ">=3.9,<3.13"
+dependencies = [
+    "pykeepass==4.0.7.post1",
+    "lxml==5.2.1",
+    "click==8.1.7",
+    "setuptools==69.5.1",
+    'python_version < 3',
+]
 
-[tool.poetry.dependencies]
-python = "^3.11"
-click = "^8.1.7"
-lxml = "^4.9.3"
-pykeepass = "^4.0.6"
+[project.scripts]
+my-client = "pykeypass:cli"
 
+[project.optional-dependencies]
+test = [    
+    'pytest',
+    'pytest-asyncio',
+    'pytest-mock'
+]
 
-[tool.poetry.group.dev.dependencies]
-ruff = "^0.0.291"
-black = "^23.9.1"
-pytest = "^7.4.2"
-
-[tool.ruff]
-# Same as Black.
-line-length = 100
-
-[tool.black]
-line-length = 100
+[project.urls]
+Homepage = "https://github.com/darrida/pykeypass"
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["setuptools", "wheel"]
+
+[tool.ruff]
+line-length = 120
+extend-exclude = [".venv"]
+extend-select = ["S", "I", "C4"]  # bandit (S), isort (I), comprehensions (C4), type-checking (TCH)
+
+[tool.ruff.isort]
+extra-standard-library = []
+known-first-party = []
+known-local-folder = []
