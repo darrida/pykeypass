@@ -1,6 +1,6 @@
 [project]
 name = "pykeypass"
-version = "2024.04.18"
+version = "2024.04.19"
 description = ""
 authors = [
     {name="bh", email="bhammond@waubonsee.edu"}

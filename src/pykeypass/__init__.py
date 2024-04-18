@@ -134,8 +134,6 @@ def keepass_manage(database, test, input_password=None):
         kp = PyKeePass(pykeypass_db, password=password)
         group = kp.find_groups(kp.root_group, f"{database}")
         entry = kp.find_entries(title=f"{database}", first=True)
-        print("HERE", entry)
-        print("HERE", group)
         if entry is None:
             confirmation = "y"
         else:
@@ -186,8 +184,6 @@ def keepass_open(database, test, input_password=None):
     """Launches requested Keepass database."""
     try:
         pykeypass_folder, pykeypass_app, pykeypass_db = path_selection(test)
-        print(pykeypass_app)
-        print(pykeypass_db)
         password = (
             getpass.getpass(prompt="pykeepass password: ") if input_password is None else input_password
         )
