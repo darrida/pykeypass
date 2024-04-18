@@ -16,7 +16,7 @@ dependencies = [
 ]
 
 [project.scripts]
-my-client = "pykeypass:cli"
+pykeypass = "pykeypass:cli"
 
 [project.optional-dependencies]
 test = [    
