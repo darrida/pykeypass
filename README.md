@@ -5,11 +5,6 @@
 ![alt text][coverage]
 ![windows](https://img.shields.io/badge/Windows-0078D6)
 
-
-[python 3.6]: https://github.com/darrida/pykeypass/workflows/python%203.6%20/badge.svg?branch=master "python 3.6"
-[python 3.7]: https://github.com/darrida/pykeypass/workflows/python%203.7%20/badge.svg?branch=master "python 3.7"
-[python 3.8]: https://github.com/darrida/pykeypass/workflows/python%203.8%20/badge.svg?branch=master "python 3.8"
-[python 3.9]: https://github.com/darrida/pykeypass/workflows/python%203.9%20/badge.svg?branch=master "python 3.9"
 [coverage]: https://github.com/darrida/pykeypass/blob/master/coverage.svg "testing coverage"
 
 # pykeypass
@@ -20,13 +15,10 @@ pykeypass (because pykeepass was already taken) uses the pykeepass library to se
 
 - [pykeypass](#pykeypass)
   - [Background](#background)
-  - [Setup and remove](#setup-and-remove)
-    - [Setup](#setup)
-    - [Remove](#remove)
+  - [Setup](#setup)
   - [Usage](#usage)
     - [Setup standalone Keepass executable and app database:](#setup-standalone-keepass-executable-and-app-database)
     - [Setup a new Keypass database entry](#setup-a-new-keypass-database-entry)
-    - [Open all Keepass databases](#open-all-keepass-databases)
     - [Open individual Keepass database](#open-individual-keepass-database)
     - [Show list of configured databases](#show-list-of-configured-databases)
     - [Show path of individual configured database](#show-path-of-individual-configured-database)
@@ -46,38 +38,24 @@ Occassionally I'd find that something cleared out the recents options, which mea
 **THE SOLUTION:**
 pykeypass allows me to open the Command Prompt, type ```pykeypass all```, input a single password, then sit back and watch all of my Keypass databases open programmatically.
 
-## Setup and remove
+## Setup
 
-### Setup
+### Requiremements
+- This utlity is build for Windows
+- Python 3.9 - 3.12 supported
 
-1. Prerequisites:
-   - Python 3.x must be installed (tested on Python 3.7 and 3.8)
+### Install
+- Standard
 
-2. Download application files
-   - Download and unzip the latest release
+```
+pip install pykeypass
+```
 
-3. Install pykeypass (enable global command line availability)
-   - Windows via script
-     - Launch **install.bat**
-     
-   - Windows via CMD
-     - Open CMD from the pykeypass directory
-     - Run ```pip install --editable .```
-     - Run ```pykeypass setup```
+- **pipx** Recommended
 
-### Remove
-
-- Windows via script:
-  - Launch **uninstall.bat**
-- Windows via CMD  
-    - Open CMD from the pykeypass directory
-    - Run ```pip install --editable .```
-    - Experimental: ```python uninstall.py```
-- Linux (*net yet working*)
-  - Launch **uninstall.sh**
-  - NOTE: if running from the terminal, the following may be required:
-    - ```chmod u+x uninstall.sh```
-    - ```./uninstall.sh```
+```
+pipx install pykeypass
+```
 
 ## Usage
 
