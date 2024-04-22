@@ -3,6 +3,7 @@
 [![python](https://img.shields.io/badge/Python-3.11-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
 [![python](https://img.shields.io/badge/Python-3.12-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
 ![alt text][coverage]
+![windows](https://img.shields.io/badge/Windows-0078D6)
 
 
 [python 3.6]: https://github.com/darrida/pykeypass/workflows/python%203.6%20/badge.svg?branch=master "python 3.6"
