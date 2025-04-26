@@ -47,7 +47,7 @@ def test_ci_setup():
 
 
 def test_ci_pykeypass_all_no_db():
-    result = runner.invoke(cli, ["all", "-t"], input="12345\n")
+    result = runner.invoke(cli, ["all", "-t"], input='12345\n')
     assert result.exit_code == 0
     assert (
         "ERROR: pykeepass app database not found. Use 'pykeypass setup' to get started.\n"

@@ -1,1 +1,0 @@
--e git+https://gitlab.waubonsee.edu/X00159799/pykeypass.git@1790eacd5dc6675f65ddb78b05afc960e554c39f#egg=pykeypass

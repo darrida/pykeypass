@@ -1,0 +1,45 @@
+# # [tool.poetry]
+# # name = "pykeypass"
+# # version = "0.1.0"
+# # description = ""
+# # authors = ["darrida <darrida.py@gmail.com>"]
+# # license = "MIT"
+# # readme = "README.md"
+
+# [project]
+# name = "pykeypass"
+# version = "0.1.0"
+# description = ""
+# readme = "README.md"
+# requires-python = ">=3.12"
+# # dependencies = [
+# #     "click >= 8.1.7",
+# #     "lxml >= 4.9.3",
+# #     "pykeepass >= 4.0.6"
+# # ]
+
+# # [tool.uv.sources]
+# # package = { path = ".dependencies/package-2024.12.20-py3-none-any.whl" }
+
+# # [dependency-groups]
+# # test = [
+# #     "pytest"
+# # ]
+
+# [project.scripts]
+# entsys = "main:cli"
+
+# [build-system]
+# requires = ["setuptools==78.1.0"]
+# build-backend = "setuptools.build_meta"  # Default build backend
+
+# [tool.ruff]
+# line-length = 120
+# extend-exclude = [".venv"]
+# extend-select = ["S", "I", "C4"]  # bandit (S), isort (I), comprehensions (C4), type-checking (TCH)
+# fixable = ["F401", "I001"]
+
+# [tool.ruff.isort]
+# extra-standard-library = []
+# known-first-party = []
+# known-local-folder = []
